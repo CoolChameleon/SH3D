@@ -1,0 +1,26 @@
+inherit_from: /home/shj20/unisurf/multisurf/configs/default.yaml
+
+network:
+  hidden_dim: 256
+  bias: 2
+
+dataloading:
+  category: cake
+  n_views: 50
+  n_sample: 20
+  batch_size: 1
+  n_workers: 1
+  resize_res: [400, 400]
+  img_size: [400, 400]
+
+training:
+  out_dir: out/CO3D/0327_cake
+  psnr_path: out/CO3D/0327_cake/psnr.txt
+  vis_resolution: [400, 400]
+
+UNetEncoder:
+  interval: 2
+
+rendering:
+  interval_decay: 0.0000015
+  radius: 10

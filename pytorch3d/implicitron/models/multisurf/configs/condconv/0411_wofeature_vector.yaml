@@ -1,0 +1,34 @@
+inherit_from: configs/default.yaml
+
+network:
+  global_latent_dim: 32
+  num_heads: 1
+  num_layers: 8
+  bias: 0.6
+  feat_size: 32
+  
+dataloading:
+  category: toybus
+  n_views: 50
+  n_sample: 50
+  batch_size: 1
+  n_workers: 1
+  resize_res: [400, 400]
+  img_size: [400, 400]
+
+training:
+  out_dir: out/CO3D/0411_wofeature_vector
+  psnr_path: out/CO3D/0411_wofeature_vector/psnr.txt
+  vis_resolution: [400, 400]
+  print_every: 50
+
+UNetEncoder:
+  interval: 2
+model:
+  depth_range: [0.3, 2.4]
+
+rendering:
+  interval_decay: 0.000015
+  radius: 3
+  interval_start: 2 
+  interval_end: 0.1

@@ -1,0 +1,33 @@
+inherit_from: ../default.yaml
+
+network:
+  global_latent_dim: 32
+  num_heads: 1
+  num_layers: 8
+  bias: 0.6
+  
+dataloading:
+  category: toybus
+  n_views: 50
+  n_sample: 50
+  batch_size: 1
+  n_workers: 1
+  resize_res: [200, 200]
+  img_size: [200, 200]
+
+training:
+  out_dir: out/CO3D/0410_singlehead_womask
+  psnr_path: out/CO3D/0410_singlehead_womask/psnr.txt
+  vis_resolution: [200, 200]
+  print_every: 50
+
+UNetEncoder:
+  interval: 2
+model:
+  depth_range: [0.3, 2.4]
+
+rendering:
+  interval_decay: 0.000015
+  radius: 3
+  interval_start: 2 
+  interval_end: 0.1

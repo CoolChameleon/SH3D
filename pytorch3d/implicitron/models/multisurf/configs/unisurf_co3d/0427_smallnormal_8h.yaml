@@ -1,0 +1,42 @@
+# inherit_from: configs/default.yaml
+inherit_from: /home/shj20/pytorch3d/pytorch3d/implicitron/models/multisurf/configs/default.yaml
+
+network:
+  global_latent_dim: 32
+  num_heads: 8
+  num_layers: 8
+  bias: 3
+  feat_size: 256
+  
+dataloading:
+  category: teddybear
+  n_views: 70
+  n_sample: 10
+  batch_size: 1
+  n_workers: 0
+  resize_res: [200, 200]
+  img_size: [200, 200]
+  dataset_name: co3d_multisequence
+  load_masked_image: True
+  test_on_train: False
+
+training:
+  out_dir: out/CO3D/0427_smallnormal_8h
+  psnr_path: out/CO3D/0427_smallnormal_8h/psnr.txt
+  vis_resolution: [200, 200]
+  print_every: 50
+  visualize_every: 1000
+  use_mh_loss: True
+  lambda_normals: 0.005
+
+UNetEncoder:
+  interval: 2
+
+model:
+  depth_range: [0.3, 4]
+
+rendering:
+  interval_decay: 0.000010
+  radius: 10
+  interval_start: 5.0 
+  interval_end: 0.3

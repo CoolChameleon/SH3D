@@ -1,0 +1,26 @@
+inherit_from: /home/shj20/unisurf/multisurf/configs/default.yaml
+
+network:
+  hidden_dim: 256
+  bias: 10
+
+dataloading:
+  category: toybus
+  n_views: 50
+  n_sample: 50
+  batch_size: 1
+  n_workers: 1
+  resize_res: [200, 200]
+  img_size: [200, 200]
+
+training:
+  out_dir: out/CO3D/0331_toybus
+  psnr_path: out/CO3D/0331_toybus/psnr.txt
+  vis_resolution: [200, 200]
+
+UNetEncoder:
+  interval: 2
+
+rendering:
+  interval_decay: 0.00000015
+  radius: 30

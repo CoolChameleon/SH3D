@@ -1,0 +1,17 @@
+inherit_from: /home/shj20/unisurf/multisurf/configs/default.yaml
+
+network:
+  hidden_dim: 256
+
+dataloading:
+  path: /home/shj20/unisurf/multisurf/data/DTU
+
+training:
+  out_dir: out/DTU_full/0321_slower_converge
+  psnr_path: out/DTU_full/0321_slower_converge/psnr.txt
+
+UNetEncoder:
+  interval: 2
+
+rendering:
+  interval_decay: 0.0000015

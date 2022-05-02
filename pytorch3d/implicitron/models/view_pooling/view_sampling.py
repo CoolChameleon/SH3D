@@ -10,6 +10,7 @@ import torch
 from pytorch3d.implicitron.tools.config import Configurable
 from pytorch3d.renderer.cameras import CamerasBase
 from pytorch3d.renderer.utils import ndc_grid_sample
+from ipdb import set_trace
 
 
 class ViewSampler(Configurable, torch.nn.Module):
@@ -140,6 +141,7 @@ def project_points_and_sample(
     n_cameras = camera.R.shape[0]
     pts_batch = pts.shape[0]
     n_pts = pts.shape[1:-1]
+    # set_trace()
 
     camera_rep, pts_rep = cameras_points_cartesian_product(camera, pts)
 
@@ -157,6 +159,7 @@ def project_points_and_sample(
     #   [pts1 in cam2, pts2 in cam2, pts3 in cam2],
     #   [pts1 in cam3, pts2 in cam3, pts3 in cam3] ]
     #   n_cameras x pts_batch x n_pts x 2
+
 
     # sample both feats
     feats_sampled = {

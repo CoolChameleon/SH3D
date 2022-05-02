@@ -15,7 +15,7 @@ from pytorch3d.common.datatypes import Device
 from pytorch3d.transforms import Rotate, Transform3d, Translate
 
 from .utils import TensorProperties, convert_to_tensors_and_broadcast
-
+from ipdb import set_trace
 
 # Default values for rotation and translation matrices.
 _R = torch.eye(3)[None]  # (1, 3, 3)

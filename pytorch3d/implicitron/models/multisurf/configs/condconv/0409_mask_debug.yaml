@@ -1,0 +1,34 @@
+inherit_from: /home/shj20/unisurf/multisurf/configs/default.yaml
+
+network:
+  global_latent_dim: 32
+  num_heads: 8
+  num_layers: 8
+  bias: 1.5
+  
+dataloading:
+  category: toybus
+  n_views: 50
+  n_sample: 50
+  batch_size: 1
+  n_workers: 1
+  resize_res: [200, 200]
+  img_size: [200, 200]
+
+training:
+  out_dir: out/CO3D/0409_mask_debug
+  psnr_path: out/CO3D/0409_mask_debug/psnr.txt
+  vis_resolution: [200, 200]
+  print_every: 50
+  lambda_normals: 0.05
+
+UNetEncoder:
+  interval: 2
+model:
+  depth_range: [1.0, 7.0]
+
+rendering:
+  interval_decay: 0.000015
+  radius: 10
+  interval_start: 4.0 
+  interval_end: 0.1

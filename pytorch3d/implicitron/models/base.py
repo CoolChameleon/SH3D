@@ -9,6 +9,7 @@ import math
 import warnings
 from dataclasses import field
 from typing import Any, Dict, List, Optional, Tuple
+from ipdb import set_trace
 
 import torch
 import tqdm
@@ -360,6 +361,7 @@ class GenericModel(Configurable, torch.nn.Module):
             img_feats = self.image_feature_extractor(image_rgb, fg_probability)
 
             # (3) Sample features and masks at the ray points
+            # set_trace()
             curried_view_sampler = lambda pts: self.view_sampler(  # noqa: E731
                 pts=pts,
                 seq_id_pts=sequence_name[:n_targets],
@@ -368,6 +370,7 @@ class GenericModel(Configurable, torch.nn.Module):
                 feats=img_feats,
                 masks=mask_crop,
             )  # returns feats_sampled, masks_sampled
+            # set_trace()
 
             # (4) Aggregate features from multiple views
             # pyre-fixme[29]: `Union[torch.Tensor, torch.nn.Module]` is not a function.

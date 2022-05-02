@@ -1,0 +1,36 @@
+# inherit_from: configs/default.yaml
+inherit_from: /home/shj20/pytorch3d/pytorch3d/implicitron/models/multisurf/configs/default.yaml
+
+network:
+  global_latent_dim: 32
+  num_heads: 1
+  num_layers: 8
+  bias: 3
+  feat_size: 256
+  
+dataloading:
+  category: toybus
+  n_views: 30
+  n_sample: 30
+  batch_size: 1
+  n_workers: 1
+  resize_res: [200, 200]
+  img_size: [200, 200]
+
+training:
+  out_dir: out/CO3D/0415_mask_unisurf
+  psnr_path: out/CO3D/0415_mask_unisurf/psnr.txt
+  vis_resolution: [200, 200]
+  print_every: 50
+  visualize_every: 500
+
+UNetEncoder:
+  interval: 2
+model:
+  depth_range: [0.5, 4]
+
+rendering:
+  interval_decay: 0.000015
+  radius: 10
+  interval_start: 2.5 
+  interval_end: 0.1

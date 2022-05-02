@@ -1,0 +1,72 @@
+
+network:
+  num_layers: 8
+  hidden_dim: 256
+  octaves_pe_points: 6
+  octaves_pe_views: 4
+  skips: [4]
+  geometric_init: True
+  feat_size: 256
+  rescale: 1.0
+  sig_factor: 10.0
+  bias: 0.6
+  latent_dim: 32
+
+rendering:
+  type: unisurf
+  n_max_network_queries: 66000
+  white_background: False
+  radius: 4.0
+  interval_start: 2.0 
+  interval_end: 0.1
+  interval_decay: 0.000015
+  num_points_in: 64
+  num_points_out: 32
+  ray_marching_steps: 256
+  occ_prob_points: 64
+  sig_factor: 10.0
+  latent_dim: 32
+
+dataloading:
+  dataset_name: DTU
+  path: /home/shj20/unisurf/multisurf/data/DTU
+  n_views: 49
+  batch_size: 1
+  n_workers: 8
+  img_size: [1200, 1600]
+  ignore_img_idx: []
+  resize_res: [300, 400]
+
+training:
+  type: unisurf
+  n_training_points: 1024
+  batch_size: 1
+  learning_rate: 0.0001
+  weight_decay: 0.0
+  scheduler_milestones: [4000, 8000]
+  scheduler_gamma: 0.5
+  visualize_every: 1000
+  print_every: 100
+  backup_every: 10000
+  checkpoint_every: 500
+  visualize_skip: 20
+  lambda_l1_rgb: 1.0
+  lambda_normals: 0.005
+  lambda_occ_prob: 0.0
+  vis_resolution: [300, 400]
+  out_dir: out/DTU_24/0320
+  psnr_path: out/DTU_24/0320/psnr.txt
+
+UNetEncoder:
+  latent_dim: 32
+  global_dim: 32
+
+model:
+  n_points_sampled: 1024
+  depth_range: [0.3, 2.4]
+
+# unisurfDecoder:
+  
+  
+
+  

@@ -7,7 +7,7 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Dict, Optional, Sequence, Union
-
+from ipdb import set_trace
 import torch
 import torch.nn.functional as F
 from pytorch3d.implicitron.models.view_pooling.view_sampling import (
@@ -284,6 +284,7 @@ class AngleWeightedReductionFeatureAggregator(torch.nn.Module, FeatureAggregator
 
         if pts is None:
             raise ValueError("Points cannot be None for angle weighted aggregation")
+        set_trace()
 
         pts_batch, n_cameras = masks_sampled.shape[:2]
         if self.exclude_target_view_mask_features:
@@ -557,6 +558,7 @@ def _get_ray_angle_weights(
     min_ray_angle_weight: float,
     weight_by_ray_angle_gamma: float,
 ):
+    # set_trace()
     ray_dir_dot_prods = _get_ray_dir_dot_prods(
         camera, pts
     )  # pts_batch x n_cameras x ... x 3

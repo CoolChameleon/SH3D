@@ -13,6 +13,7 @@ import torch
 import torch.nn.functional as Fu
 import torchvision
 from pytorch3d.implicitron.tools.config import Configurable
+from ipdb import set_trace
 
 
 logger = logging.getLogger(__name__)
