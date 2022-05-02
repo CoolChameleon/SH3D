@@ -77,7 +77,7 @@ def sample_patch_points_with_mask(n_points, image_resolution, origin_mask, maske
     sampled_pixels_in = index_masked[torch.multinomial(torch.ones(index_masked.shape[0]), n_points_in, replacement=True)]
 
     index_unmasked = index[~mask.bool()]
-    sampled_pixels_out = index_unmasked[torch.multinomial(torch.ones(index_masked.shape[0]), n_points_out, replacement=True)]
+    sampled_pixels_out = index_unmasked[torch.multinomial(torch.ones(index_unmasked.shape[0]), n_points_out, replacement=True)]
 
     sampled_pixels = torch.cat([sampled_pixels_in, sampled_pixels_out], dim=0)
     sampled_p_ndc = -(sampled_pixels / torch.tensor(image_resolution)) * 2 + 1
