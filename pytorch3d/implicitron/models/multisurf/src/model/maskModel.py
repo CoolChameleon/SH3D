@@ -35,6 +35,7 @@ class BaseModel(nn.Module):
         self.img_res = cfg["dataloading"].get("resize_res", cfg["dataloading"]["img_size"])
         self.psnr_path = cfg["training"]["psnr_path"]
         self.use_mh_loss = cfg["training"].get("use_mh_loss", False)
+        self.mask_ratio = cfg["training"].get("mask_ratio", 1)
 
         self.decoder = condMLPDecoder(cfg).to(self.device)
         # self.decoder = OccupancyNetwork(cfg).to(self.device)
@@ -58,7 +59,7 @@ class BaseModel(nn.Module):
 
         # 我没有看common里面是不是真的有这么个函数
         # sampled_p_ndc, sampled_pixels = common.sample_patch_points_with_mask_neighbor(self.n_points_sampled, self.img_res, origin_mask=mask)
-        sampled_p_ndc, sampled_pixels = common.sample_patch_points_with_mask(self.n_points_sampled, self.img_res, origin_mask=mask)#(1 1024 2)
+        sampled_p_ndc, sampled_pixels = common.sample_patch_points_with_mask(self.n_points_sampled, self.img_res, origin_mask=mask, masked_ratio=self.mask_ratio)#(1 1024 2)
         sampled_p_ndc = sampled_p_ndc.to(self.device)
         sampled_pixels = sampled_pixels.to(self.device)
         depth_gt = common.get_depth_mask_gt(sampled_pixels, depth_map, depth_mask)

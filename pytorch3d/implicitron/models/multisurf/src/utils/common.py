@@ -58,7 +58,7 @@ def sample_patch_points_with_mask_neighbor(n_points, image_resolution, origin_ma
     return sampled_p_ndc_all.unsqueeze(0), sampled_pixels_all.float().unsqueeze(0)
 
 
-def sample_patch_points_with_mask(n_points, image_resolution, origin_mask):
+def sample_patch_points_with_mask(n_points, image_resolution, origin_mask, masked_ratio=1):
     # set_trace()
     # assert(list(mask.shape) == image_resolution)
     if origin_mask is None:
@@ -67,11 +67,21 @@ def sample_patch_points_with_mask(n_points, image_resolution, origin_mask):
     
     assert(mask.shape[0] == image_resolution[0] and mask.shape[1] == image_resolution[1])
     h, w = image_resolution
+
+    n_points_in = int(n_points * masked_ratio)
+    n_points_out = n_points - n_points_in
     # index = torch.stack([torch.arange(h).reshape(-1, 1).repeat(1, w), torch.arange(w).reshape(1, -1).repeat(h, 1)], dim=2)
     index = torch.stack([torch.arange(w).reshape(1, -1).repeat(h, 1), torch.arange(h).reshape(-1, 1).repeat(1, w)], dim=2)
+
     index_masked = index[mask.bool()]
-    sampled_pixels = index_masked[torch.multinomial(torch.ones(index_masked.shape[0]), n_points, replacement=True)]
+    sampled_pixels_in = index_masked[torch.multinomial(torch.ones(index_masked.shape[0]), n_points_in, replacement=True)]
+
+    index_unmasked = index[~mask.bool()]
+    sampled_pixels_out = index_unmasked[torch.multinomial(torch.ones(index_masked.shape[0]), n_points_out, replacement=True)]
+
+    sampled_pixels = torch.cat([sampled_pixels_in, sampled_pixels_out], dim=0)
     sampled_p_ndc = -(sampled_pixels / torch.tensor(image_resolution)) * 2 + 1
+
     return sampled_p_ndc.unsqueeze(0), sampled_pixels.float().unsqueeze(0)
 
 
